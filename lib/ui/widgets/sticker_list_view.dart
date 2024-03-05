@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/_data.dart';
@@ -19,12 +20,30 @@ class StickerListView extends StatelessWidget {
           padding: const EdgeInsets.only(top: 20),
           itemBuilder: (_, index) {
             Sticker sticker = isReversed ? stickers.reversed.toList()[index] : stickers[index];
-            return GestureDetector(
-              onTap: () {
-                print('Клик на карточку');
-                Navigator.of(context).push(MaterialPageRoute(builder: (_) => const StickerDetail()));
+            // return GestureDetector(
+            //   onTap: () {
+            //     print('Клик на карточку');
+            //     Navigator.of(context).push(MaterialPageRoute(builder: (_) => const StickerDetail()));
+            //   },
+            //   child: _StickerCard(sticker: sticker,),
+            // );
+            return OpenContainer<bool>(
+              transitionType: ContainerTransitionType.fadeThrough,
+              openBuilder: (BuildContext _, VoidCallback openContainer) {
+                return const StickerDetail();
               },
-              child: _StickerCard(sticker: sticker,),
+              onClosed: (_){},
+              tappable: false,
+              closedShape: const RoundedRectangleBorder(),
+              closedElevation: 0.0,
+              closedBuilder: (BuildContext _, VoidCallback openContainer) {
+                return GestureDetector(
+                  onTap: openContainer,
+                  child: _StickerCard(sticker: sticker,),
+                );
+              },
+              openColor: Colors.transparent,
+              closedColor: Colors.transparent,
             );
           },
           separatorBuilder: (_, __) {

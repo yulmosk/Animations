@@ -238,3 +238,56 @@ onTap: () {
 ```
 
 Откроем детальный просмотр с использованием виджета OpenContainer
+
+```dart
+class StickerListView extends StatelessWidget {
+  const StickerListView({super.key, required this.stickers, this.isReversed = false});
+
+  final List<Sticker> stickers;
+  final bool isReversed;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 200,
+      child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.only(top: 20),
+          itemBuilder: (_, index) {
+            Sticker sticker = isReversed ? stickers.reversed.toList()[index] : stickers[index];
+            // return GestureDetector(
+            //   onTap: () {
+            //     print('Клик на карточку');
+            //     Navigator.of(context).push(MaterialPageRoute(builder: (_) => const StickerDetail()));
+            //   },
+            //   child: _StickerCard(sticker: sticker,),
+            // );
+            return OpenContainer<bool>(
+              transitionType: ContainerTransitionType.fadeThrough,
+              openBuilder: (BuildContext _, VoidCallback openContainer) {
+                return const StickerDetail();
+              },
+              onClosed: (_){},
+              tappable: false,
+              closedShape: const RoundedRectangleBorder(),
+              closedElevation: 0.0,
+              closedBuilder: (BuildContext _, VoidCallback openContainer) {
+                return GestureDetector(
+                  onTap: openContainer,
+                  child: _StickerCard(sticker: sticker,),
+                );
+              },
+              openColor: Colors.transparent,
+              closedColor: Colors.transparent,
+            );
+          },
+          separatorBuilder: (_, __) {
+            return Container(
+              width: 50,
+            );
+          },
+          itemCount: 20),
+    );
+  }
+}
+```
