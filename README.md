@@ -88,6 +88,13 @@ dependencies:
 
 Листинг файла lib >> ui >> widgets >> sticker_list_view.dart
 
-```dart
+Клик на карточку главного экрана и открытие детального просмотра
 
+```dart
+onTap: () {
+  print('Клик на карточку');
+  Navigator.of(context).push(MaterialPageRoute(builder: (_) => const StickerDetail()));
+},
 ```
+
+Откроем детальный просмотр с использованием виджета OpenContainer
