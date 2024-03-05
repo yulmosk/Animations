@@ -85,9 +85,3 @@ dependencies:
 ## Ветка :star: detail_page
 
 Использование виджета OpenContainer библиотеки animations для детального просмотра стикера при клике на карточку.
-
-Листинг файла lib >> ui >> widgets >> sticker_list_view.dart
-
-```dart
-
-```
