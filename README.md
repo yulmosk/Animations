@@ -86,9 +86,7 @@ dependencies:
 
 Использование виджета OpenContainer библиотеки animations для детального просмотра стикера при клике на карточку.
 
-Листинг файла lib >> ui >> widgets >> sticker_list_view.dart
-
-Клик на карточку главного экрана и открытие детального просмотра
+Код клика на карточку главного экрана и открытие экрана детального просмотра (StickerDetail()) находится в файле lib >> ui >> widgets >> sticker_list_view.dart
 
 ```dart
 onTap: () {
