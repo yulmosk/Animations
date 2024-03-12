@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/_data.dart';
@@ -42,29 +43,59 @@ class FavoriteScreenState extends State<FavoriteScreen> {
       itemCount: favoriteItems.length,
       itemBuilder: (_, index) {
         Sticker sticker = favoriteItems[index];
-        return Card(
-          color: Theme.of(context).brightness == Brightness.light ? Colors.white : AppColor.dark,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
-          ),
-          child: ListTile(
-            title: Text(
-              sticker.name,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            leading: Image.asset(sticker.image),
-            subtitle: Text(
-              sticker.description,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            trailing: const Icon(AppIcon.heart, color: Colors.redAccent),
-          ),
+        //return _CardItem(sticker: sticker);
+        return OpenContainer<bool>(
+          transitionType: ContainerTransitionType.fadeThrough,
+          openBuilder: (BuildContext _, VoidCallback openContainer) {
+            return const StickerDetail();
+          },
+          onClosed: (_){},
+          tappable: false,
+          closedShape: const RoundedRectangleBorder(),
+          closedElevation: 0.0,
+          closedBuilder: (BuildContext _, VoidCallback openContainer) {
+            return GestureDetector(
+              onTap: openContainer,
+              child: _CardItem(sticker: sticker,),
+            );
+          },
+          openColor: Colors.transparent,
+          closedColor: Colors.transparent,
         );
+
       },
       separatorBuilder: (_, __) => Container(
         height: 20,
       ),
     );
   }
+}
+
+class _CardItem extends StatelessWidget{
+  const _CardItem({required this.sticker});
+  final Sticker sticker;
+  
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Theme.of(context).brightness == Brightness.light ? Colors.white : AppColor.dark,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: ListTile(
+        title: Text(
+          sticker.name,
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        leading: Image.asset(sticker.image),
+        subtitle: Text(
+          sticker.description,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        trailing: const Icon(AppIcon.heart, color: Colors.redAccent),
+      ),
+    );
+  }
+  
 }

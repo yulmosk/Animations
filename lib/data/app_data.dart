@@ -343,6 +343,21 @@ class AppData {
   static List<Sticker> favoriteItems = [
     stickers[0]..isFavorite = true,
     stickers[1]..isFavorite = true,
-    stickers[2]..isFavorite = true
+    stickers[2]..isFavorite = true,
+    stickers[3]..isFavorite = true,
+    stickers[4]..isFavorite = true,
+    stickers[5]..isFavorite = true,
+    stickers[6]..isFavorite = true,
+    stickers[7]..isFavorite = true,
+    stickers[8]..isFavorite = true,
+    stickers[9]..isFavorite = true,
+    stickers[10]..isFavorite = true,
+    stickers[0]..isFavorite = true,
+    stickers[1]..isFavorite = true,
+    stickers[2]..isFavorite = true,
+    stickers[3]..isFavorite = true,
+    stickers[4]..isFavorite = true,
+    stickers[5]..isFavorite = true,
+    stickers[6]..isFavorite = true,
   ];
 }
